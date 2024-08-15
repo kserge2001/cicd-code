@@ -150,7 +150,7 @@ pipeline{
             }
         }
     }
-    */
+    
 
 }
     }
@@ -186,6 +186,8 @@ pipeline{
                 attachmentsPattern: 'trivy-fs-report.html, docker_image_report.html'
             )
         }
+         */
     }
+   
 }
 
