@@ -33,7 +33,7 @@ pipeline{
                 url: "${PROJECT_URL}"
             }
         }
-        
+        // this stage is for test
         stage('Unit Test'){
             steps{
                 sh 'mvn clean'
