@@ -70,7 +70,7 @@ pipeline{
                 sh 'mvn package'
             }
         }
-        
+        /*
         stage('Upload Jar to Jfrog'){
             steps{
                 withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", \
@@ -91,7 +91,8 @@ pipeline{
     }
 
 }
-/*
+*/
+
     stage('Docker image Build'){
         steps{
             script{
@@ -120,7 +121,7 @@ pipeline{
         }
     }
     }
-   
+  /* 
     stage('Chart Version Update'){
         steps{
          sh "python3 setup_script/charUpdate.py ${BUILD_ID}" 
