@@ -91,7 +91,7 @@ pipeline{
     }
 
 }
-*/
+
 
     stage('Docker image Build'){
         steps{
@@ -121,10 +121,10 @@ pipeline{
         }
     }
     }
-  
+  */
     stage('Chart Version Update'){
         steps{
-         sh "python3 setup_scripts/charUpdate.py ${BUILD_ID}" 
+         sh "python3 setup_scripts/chartUpdate.py ${BUILD_ID}" 
            
         }
     }
