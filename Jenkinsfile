@@ -22,8 +22,8 @@ pipeline{
       PROJECT_URL = 'https://github.com/kserge2001/cicd-code.git'
       ARTIFACTPATH = 'target/*.jar'
       ARTIFACTTARGETPATH = "release_${BUILD_ID}.jar"
-      HELMARTIFACTPATH = "geo-app-${BUILD_ID}.tgz"
-      HELMARTIFACTTARGET = "heml/geo-app-${BUILD_ID}.tgz"
+      HELMARTIFACTPATH = "geoapp-${BUILD_ID}.tgz"
+      HELMARTIFACTTARGET = "heml/geoapp-${BUILD_ID}.tgz"
 
     }
     stages{
