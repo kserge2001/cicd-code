@@ -130,7 +130,7 @@ pipeline{
     }
     stage('Package Helm'){
         steps{
-            sh 'helm package geo-app'
+            sh 'helm package geoapp'
         }
     }
     stage('Upload helm package to Jfrog'){
