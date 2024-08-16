@@ -164,8 +164,8 @@ stage('Deploy helm to k8s'){
     steps{
         kubeconfig(credentialsId: "${KUBERNETES_CRED}" ,caCertificate: '', serverUrl: "${KUBERNETES_URL}") {
     
-    sh 'helm rollback geo -n dev'
-    sh 'sleep 60'
+   // sh 'helm rollback geo -n dev'
+   // sh 'sleep 60'
     sh 'helm upgrade geo geoapp -n dev'
     
 
