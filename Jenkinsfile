@@ -16,6 +16,8 @@ pipeline{
       DOCKER_REPO = "${REPO_URL}/${DOCKER_REPO_NAME}"
       BRANCH_NAME= 'main'
       GIT_CRED = 'GITHUB_CRED'
+      KUBERNETES_CRED: 'KUBERNETES_CRED'
+      KUBERNETES_URL: 'https://104.237.133.213:6443'
       SONAQUBE_CRED = 'sonarqube_ID'
       SONAQUBE_INSTALLATION = 'Sonarqube'
       JFROG_CRED = 'j_frog-cred'
@@ -159,7 +161,7 @@ pipeline{
 */
 stage('Deploy helm to k8s'){
     steps{
-        kubeconfig(credentialsId: 'KUBERNETES_CRED',caCertificate: '', serverUrl: 'https://104.237.133.213:6443') {
+        kubeconfig(credentialsId: "${KUBERNETES_CRED}" ,caCertificate: '', serverUrl: "${KUBERNETES_URL}") {
     sh 'helm install  geo geoapp -n dev || helm upgrade  geo geoapp -n dev '
 }
     }
