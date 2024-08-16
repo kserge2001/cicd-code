@@ -162,16 +162,10 @@ pipeline{
 stage('Deploy helm to k8s'){
     steps{
         kubeconfig(credentialsId: "${KUBERNETES_CRED}" ,caCertificate: '', serverUrl: "${KUBERNETES_URL}") {
-    //sh 'helm install  geo geoapp -n dev || helm upgrade  geo geoapp -n dev --force'
-    sh '''
-if helm status geo -n dev >/dev/null 2>&1; then
-  echo "Upgrading existing release..."
-  helm upgrade geo geoapp -n dev --force
-else
-  echo "Installing new release..."
-  helm install geo geoapp -n dev
-fi
-'''
+    sh 'helm uninstall  geo geoapp -n dev' 
+    sh  'helm upgrade  geo geoapp -n dev '
+    
+
 }
     }
 }
