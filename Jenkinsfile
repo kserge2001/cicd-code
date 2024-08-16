@@ -35,7 +35,7 @@ pipeline{
                 url: "${PROJECT_URL}"
             }
         }
-        /*
+        
         // this stage is for test
         stage('Unit Test'){
             steps{
@@ -67,8 +67,8 @@ pipeline{
                  sh "trivy fs --format table -o maven_dependency.html ."
             }
         }
-        */
-        /*
+       
+       
         stage('Code Package'){
             steps{
                 sh 'mvn package'
@@ -95,7 +95,7 @@ pipeline{
     }
 
 }
-*/
+
 
     stage('Docker image Build'){
         steps{
@@ -165,10 +165,10 @@ stage('Deploy helm to k8s'){
     sh 'helm install  geo geoapp -n dev || helm upgrade  geo geoapp -n dev'
     
 
-}
     }
+  }
 }
-/* 
+ 
     }
     post {
     always {
@@ -202,8 +202,40 @@ stage('Deploy helm to k8s'){
                 attachmentsPattern: 'trivy-fs-report.html, docker_image_report.html'
             )
         }
-         */
+        
     }
-   
+    failure {
+        script {
+            def jobName = env.JOB_NAME
+            def buildNumber = env.BUILD_NUMBER
+            def pipelineStatus = currentBuild.result ?: 'SUCCESS'
+            def bannerColor = pipelineStatus == 'SUCCESS' ? 'green' : 'red'
+
+            def body = """
+                <html>
+                <body>
+                <div style="border: 4px solid ${bannerColor}; padding: 10px;">
+                <h2>${jobName} - Build ${buildNumber}</h2>
+                <div style="background-color: ${bannerColor}; padding: 10px;">
+                <h3 style="color: white;">Pipeline Status: ${pipelineStatus}</h3>
+                </div>
+                <p>Check the <a href="${BUILD_URL}">console output</a>.</p>
+                </div>
+                </body>
+                </html>
+            """
+
+            emailext (
+                subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus}",
+                body: body,
+                to: 'unixclassd1@gmail.com',
+                from: 'jenkins@example.com',
+                replyTo: 'jenkins@example.com',
+                mimeType: 'text/html',
+                attachmentsPattern: 'trivy-fs-report.html, docker_image_report.html'
+            )
+        }
+    }
+    } 
 }
 
