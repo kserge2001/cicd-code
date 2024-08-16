@@ -4,7 +4,7 @@ import sys
 
 def checkVersionArgument():
     if sys.argv[1]:
-        APP_VERSION = sys.argv[1]
+        return sys.argv[1]
     else:
         print("MIssing Release version")
         sys.exit(98)
