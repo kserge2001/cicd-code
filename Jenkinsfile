@@ -95,7 +95,7 @@ pipeline{
     }
 
 }
-
+*/
 
     stage('Docker image Build'){
         steps{
@@ -158,12 +158,11 @@ pipeline{
     
 
 }
-*/
+
 stage('Deploy helm to k8s'){
     steps{
         kubeconfig(credentialsId: "${KUBERNETES_CRED}" ,caCertificate: '', serverUrl: "${KUBERNETES_URL}") {
-    sh 'helm uninstall  geo geoapp -n dev' 
-    sh  'helm upgrade  geo geoapp -n dev '
+    sh 'helm install  geo geoapp -n dev || helm upgrade  geo geoapp -n dev'
     
 
 }
