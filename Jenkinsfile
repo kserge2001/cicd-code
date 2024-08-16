@@ -199,7 +199,7 @@ stage('Deploy helm to k8s'){
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
                 mimeType: 'text/html',
-                attachmentsPattern: 'trivy-fs-report.html, docker_image_report.html'
+                attachmentsPattern: 'maven_dependency.html, docker_image_report.html'
             )
         }
         
@@ -232,7 +232,7 @@ stage('Deploy helm to k8s'){
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
                 mimeType: 'text/html',
-                attachmentsPattern: 'trivy-fs-report.html, docker_image_report.html'
+                attachmentsPattern: 'maven_dependency.html, docker_image_report.html'
             )
         }
     }
