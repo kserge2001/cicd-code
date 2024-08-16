@@ -25,7 +25,7 @@ def chartModif(chart_version):
                     f1.write(f'appVersion: {chart_version}\n')
                 else:
                     f1.write(line)
-
+        print(f"Chart updated to version {APP_VERSION}")
 def main():
     takeBackup()     
     chartModif(APP_VERSION)    
