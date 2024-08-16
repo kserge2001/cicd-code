@@ -2,10 +2,20 @@ import shutil
 import sys
 
 
-APP_VERSION = sys.argv[1]
+def checkVersionArgument():
+    if sys.argv[1]:
+        APP_VERSION = sys.argv[1]
+    else:
+        print("MIssing Release version")
+        sys.exit(98)
 
 def takeBackup():
-    shutil.copy('geoapp/Chart.yaml', 'geoapp/chart_bk.yaml')
+    
+    try:
+        shutil.copy('geoapp/Chart.yaml', 'geoapp/chart_bk.yaml')
+    except Exception as e:
+        print(f"Error: {e}")
+        
 
 def chartModif(chart_version):
     
@@ -26,7 +36,9 @@ def chartModif(chart_version):
                 else:
                     f1.write(line)
         print(f"Chart updated to version {APP_VERSION}")
+        
 def main():
+    APP_VERSION=checkVersionArgument()
     takeBackup()     
     chartModif(APP_VERSION)    
 
