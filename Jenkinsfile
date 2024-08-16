@@ -160,7 +160,7 @@ pipeline{
 stage('Deploy helm to k8s'){
     steps{
         kubeconfig(credentialsId: 'KUBERNETES_CRED',caCertificate: '', serverUrl: 'https://104.237.133.213:6443') {
-    sh 'helm install  geo geoapp'
+    sh 'helm install  geo geoapp -n dev'
 }
     }
 }
