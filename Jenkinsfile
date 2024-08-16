@@ -196,7 +196,7 @@ stage('Deploy helm to k8s'){
                 subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus}",
                 body: body,
                 to: 'unixclassd1@gmail.com',
-                from: 'jenkins@example.com',
+                from: 'unixclassd1@gmail.com',
                 replyTo: 'jenkins@example.com',
                 mimeType: 'text/html',
                 attachmentsPattern: 'maven_dependency.html, docker_image_report.html'
@@ -229,7 +229,7 @@ stage('Deploy helm to k8s'){
                 subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus}",
                 body: body,
                 to: 'unixclassd1@gmail.com',
-                from: 'jenkins@example.com',
+                from: 'unixclassd1@gmail.com',
                 replyTo: 'jenkins@example.com',
                 mimeType: 'text/html',
                 attachmentsPattern: 'maven_dependency.html, docker_image_report.html'
