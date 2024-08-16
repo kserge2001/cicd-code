@@ -35,7 +35,7 @@ pipeline{
                 url: "${PROJECT_URL}"
             }
         }
-       /*
+       
         // this stage is for test
         stage('Unit Test'){
             steps{
@@ -68,13 +68,13 @@ pipeline{
             }
         }
        
-       */
+     
         stage('Code Package'){
             steps{
                 sh 'mvn package'
             }
         }
-        /*
+      
         stage('Upload Jar to Jfrog'){
             steps{
                 withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", \
@@ -96,7 +96,6 @@ pipeline{
 
 }
 
-*/
     stage('Docker image Build'){
         steps{
             script{
@@ -106,7 +105,7 @@ pipeline{
            
         }
     }
-  /*
+  
     stage('Scan Docker Image'){
         steps{
           sh """trivy image --format table -o docker_image_report.html ${DOCKER_REPO}:${BUILD_ID}"""
@@ -125,7 +124,7 @@ pipeline{
         }
     }
     }
-  */
+
     stage('Chart Version Update'){
         steps{
          sh "python3 setup_scripts/chartUpdate.py ${BUILD_ID}" 
@@ -137,7 +136,7 @@ pipeline{
             sh 'helm package geoapp'
         }
     }
-    /*
+
     stage('Upload helm package to Jfrog'){
             steps{
                  withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", \
@@ -159,7 +158,7 @@ pipeline{
     
 
 }
-*/
+
 stage('Deploy helm to k8s'){
     steps{
         kubeconfig(credentialsId: "${KUBERNETES_CRED}" ,caCertificate: '', serverUrl: "${KUBERNETES_URL}") {
@@ -175,7 +174,7 @@ stage('Deploy helm to k8s'){
 }
  
     }
-    /*
+    
     post {
     always {
         script {
@@ -242,9 +241,9 @@ stage('Deploy helm to k8s'){
                 attachmentsPattern: 'maven_dependency.html, docker_image_report.html'
             )
         }
-    }
+     }
     
     } 
-    */
+   
 }
 
