@@ -33,6 +33,7 @@ pipeline{
                 url: "${PROJECT_URL}"
             }
         }
+        /*
         // this stage is for test
         stage('Unit Test'){
             steps{
@@ -41,7 +42,7 @@ pipeline{
                 sh 'mvn test'
             }
         }
-        /*
+        
         stage('Sonarqube Scan'){
             steps{
                 withSonarQubeEnv(credentialsId: "${SONAQUBE_CRED}", \
@@ -65,12 +66,13 @@ pipeline{
             }
         }
         */
+        /*
         stage('Code Package'){
             steps{
                 sh 'mvn package'
             }
         }
-        /*
+        
         stage('Upload Jar to Jfrog'){
             steps{
                 withCredentials([usernamePassword(credentialsId: "${JFROG_CRED}", \
@@ -121,7 +123,7 @@ pipeline{
         }
     }
     }
-  */
+  
     stage('Chart Version Update'){
         steps{
          sh "python3 setup_scripts/chartUpdate.py ${BUILD_ID}" 
@@ -153,6 +155,14 @@ pipeline{
     }
     
 
+}
+*/
+stage('Deploy helm to k8s'){
+    steps{
+        kubeconfig(credentialsId: 'KUBERNETES_CRED', serverUrl: 'https://104.237.133.213:6443') {
+    sh 'helm install  geo geoapp'
+}
+    }
 }
 /* 
     }
