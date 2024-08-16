@@ -162,7 +162,7 @@ pipeline{
 stage('Deploy helm to k8s'){
     steps{
         kubeconfig(credentialsId: "${KUBERNETES_CRED}" ,caCertificate: '', serverUrl: "${KUBERNETES_URL}") {
-    sh 'helm install  geo geoapp -n dev || helm upgrade  geo geoapp -n dev --force'
+    sh 'helm upgrade --install geo geoapp -n dev'
     
 
     }
@@ -184,6 +184,7 @@ stage('Deploy helm to k8s'){
                 <div style="border: 4px solid ${bannerColor}; padding: 10px;">
                 <h2>${jobName} - Build ${buildNumber}</h2>
                 <div style="background-color: ${bannerColor}; padding: 10px;">
+                <h3>Please see attached report </h3>
                 <h3 style="color: white;">Pipeline Status: ${pipelineStatus}</h3>
                 </div>
                 <p>Check the <a href="${BUILD_URL}">console output</a>.</p>
